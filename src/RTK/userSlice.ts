@@ -19,7 +19,7 @@ const initialState: UserState = {
     avatar: null,
     name: "",
   },
-  Login: false,
+  Login: true,
 };
 
 const userSlice = createSlice({
