@@ -7,11 +7,17 @@ import { Provider } from 'react-redux';
 import {store} from './RTK/store.ts';
 import { MainLayOut } from './MainLayOut.tsx';
 import LoadingPage from './Components/Childrens/LoadingPage.tsx';
+import Home from './Components/Home.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element:<MainLayOut/>,
-
+    children:[
+      {
+        path:"/",
+        element:<Home/>
+      }
+    ]
   },
   {
     path: "/loading",

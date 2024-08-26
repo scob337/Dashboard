@@ -1,60 +1,95 @@
 import {
   Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
   Menu,
   MenuButton,
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { BellIcon } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { RootState } from "../RTK/store";
 import Logo from "./Logo";
+import { IoIosClose, IoMdSearch } from "react-icons/io";
+import { useState } from "react";
 
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
-];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
   { name: "Sign out", href: "#" },
 ];
 
-function classNames(...classes: (string | undefined | false)[]): string {
+function classNames(...classes: (string | undefined | false | null)[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function NavBar() {
+export default function NavBar({ Toggle , Visible }) {
   const selector = useSelector((state: RootState) => state.User.User);
   console.log(selector);
 
+  const [HideInput, setHideInput] = useState(true);
+  const [SearchValue, setSearchValue] = useState("");
+  const HandleCloseSearch = () => {
+    setSearchValue("");
+    setHideInput(true);
+  };
+  console.log(Visible)
   return (
     <>
-      <div className="min-h-full" >
+      <div className="min-h-full ">
         <Disclosure as="nav" className="w-full">
           <div className="mx-auto max-w-full  ">
             <div className="flex h-16 items-center justify-between w-[100%]  ">
-              <div className="flex items-center w-[25%]  bg-[#ccc] h-full" >
-                <div className="flex-shrink-0  w-[100%]">
+              <div className="flex items-center w-[500px] lg:w-[64.5%]   h-full ">
+                <div className="flex items-center justify-start gap-2  p-3  lg:w-[40%]  bg-[#ccc] h-full  ">
+
                   <Logo />
+
+                  <label className="relative inline-flex items-center cursor-pointer lg:hidden"
+                  
+                  >
+                    <input type="checkbox" value="" className="sr-only peer" 
+                    checked={Visible}
+                    onChange={ Toggle}
+                    />
+                    <div className="w-9 h-5 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600 hover:peer-checked:bg-indigo-700"></div>
+                  </label>
                 </div>
-                <div className="hidden md:block">
-                  <div className="ml-10 flex items-baseline space-x-4">
+                <div className=" hidden lg:flex w-fit">
+                  <div className="ml-10 flex items-baseline space-x-4 ">
+                    <div
+                      className={`input flex items-center justify-start gap-3 transition-width duration-500 ease-in-out`}
+                      style={{
+                        width: HideInput ? "0" : "170px",
+                        overflow: "hidden",
+                      }} // تعيين عرض قابل للتغير باستخدام style
+                    >
+                      <IoIosClose
+                        size={24}
+                        cursor={"pointer"}
+                        onClick={HandleCloseSearch}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Enter a Keyword"
+                        className="p-1 outline-none border-none"
+                        style={{ width: "100%" }}
+                        value={HideInput ? "" : SearchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                      />
+                    </div>
 
-
-                
-
-
+                    <div className="search">
+                      <IoMdSearch
+                        size={24}
+                        cursor={"pointer"}
+                        onClick={() => setHideInput(false)}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="hidden md:block p-4">
-                <div className="ml-4 flex items-center md:ml-6">
+              <div className="flex justify-end w-[70%] p-4">
+                <div className=" flex items-center justify-end">
                   <button
                     type="button"
                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -95,97 +130,10 @@ export default function NavBar() {
                   </Menu>
                 </div>
               </div>
-              <div className="-mr-2 flex md:hidden">
-                {/* Mobile menu button */}
-                <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open main menu</span>
-                  <Bars3Icon
-                    aria-hidden="true"
-                    className="block h-6 w-6 group-data-[open]:hidden"
-                  />
-                  <XMarkIcon
-                    aria-hidden="true"
-                    className="hidden h-6 w-6 group-data-[open]:block"
-                  />
-                </DisclosureButton>
-              </div>
+              <div className="-mr-2 flex md:hidden"></div>
             </div>
           </div>
-
-          <DisclosurePanel className="md:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-              {navigation.map((item) => (
-                <DisclosureButton
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  aria-current={item.current ? "page" : undefined}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                >
-                  {item.name}
-                </DisclosureButton>
-              ))}
-            </div>
-            <div className="border-t border-gray-700 pb-3 pt-4">
-              <div className="flex items-center px-5">
-                <div className="flex-shrink-0">
-                  <img
-                    alt=""
-                    src={selector?.avatar}
-                    className="h-10 w-10 rounded-full"
-                  />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium leading-none text-white">
-                    {selector?.name}
-                  </div>
-                  <div className="text-sm font-medium leading-none text-gray-400">
-                    {selector?.email}
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon aria-hidden="true" className="h-6 w-6" />
-                </button>
-              </div>
-              <div className="mt-3 space-y-1 px-2">
-                {userNavigation.map((item) => (
-                  <DisclosureButton
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                  >
-                    {item.name}
-                  </DisclosureButton>
-                ))}
-              </div>
-            </div>
-          </DisclosurePanel>
         </Disclosure>
-
-
-
-
-
-        <main>
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-
-
-
-
-          </div>
-        </main>
       </div>
     </>
   );
