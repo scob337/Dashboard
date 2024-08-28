@@ -40,7 +40,7 @@ console.log(isAsideVisible)
       <section className="w-[100%]  grid grid-cols-5 gap-4 h-screen ">
 
        <div         
-        className={`col-span-1 bg-[#ccc] h-full shadow-lg transform transition-all duration-300 ease-in-out
+        className={`col-span-1 bg-[#fff] h-full shadow-lg transform transition-all duration-300 ease-in-out
           ${isAsideVisible ? 'absolute top-[60px] left-0 w-[45.5%] md:w-[228px] lg:w-[100%] lg:relative' : 'w-0 overflow-hidden lg:w-[100%] lg:relative'}
           lg:block lg:w-[100%] lg:relative
         `}

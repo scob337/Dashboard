@@ -21,8 +21,11 @@ const userNavigation = [
 function classNames(...classes: (string | undefined | false | null)[]): string {
   return classes.filter(Boolean).join(" ");
 }
-
-export default function NavBar({ Toggle , Visible }) {
+interface Iprops {
+Toggle: () => void
+  Visible:boolean
+}
+export default function NavBar({ Toggle , Visible }:Iprops) {
   const selector = useSelector((state: RootState) => state.User.User);
   console.log(selector);
 
@@ -40,7 +43,7 @@ export default function NavBar({ Toggle , Visible }) {
           <div className="mx-auto max-w-full  ">
             <div className="flex h-16 items-center justify-between w-[100%]  ">
               <div className="flex items-center w-[500px] lg:w-[64.5%]   h-full ">
-                <div className="flex items-center justify-start gap-2  p-3  lg:w-[40%]  bg-[#ccc] h-full  ">
+                <div className="flex items-center justify-start gap-2  p-3  lg:w-[40%]  h-full  ">
 
                   <Logo />
 
@@ -61,7 +64,7 @@ export default function NavBar({ Toggle , Visible }) {
                       style={{
                         width: HideInput ? "0" : "170px",
                         overflow: "hidden",
-                      }} // تعيين عرض قابل للتغير باستخدام style
+                      }} 
                     >
                       <IoIosClose
                         size={24}
