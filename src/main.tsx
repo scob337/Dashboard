@@ -8,6 +8,7 @@ import {store} from './RTK/store.ts';
 import { MainLayOut } from './MainLayOut.tsx';
 import LoadingPage from './Components/Childrens/LoadingPage.tsx';
 import Home from './Components/Home.tsx';
+import Index from './Components/Childrens/Home/Index.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,9 +16,17 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Home/>
-      }
-    ]
+        element:<Home/>,
+        children:[
+          {
+
+          path: "/",
+          element: <Index/>,
+        },
+
+    ]}
+          
+    ],
   },
   {
     path: "/loading",

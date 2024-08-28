@@ -37,19 +37,22 @@ console.log(isAsideVisible)
 
       <NavBar Toggle={toggleAside} Visible={isAsideVisible}/>
 
-      <section className="w-[100%]  grid grid-cols-5 gap-4 h-screen ">
+      <section className="w-full  grid grid-cols-5 gap-4 h-screen bg-[#f0f5fa]">
 
        <div         
-        className={`col-span-1 bg-[#fff] h-full shadow-lg transform transition-all duration-300 ease-in-out
-          ${isAsideVisible ? 'absolute top-[60px] left-0 w-[45.5%] md:w-[228px] lg:w-[100%] lg:relative' : 'w-0 overflow-hidden lg:w-[100%] lg:relative'}
-          lg:block lg:w-[100%] lg:relative
+        className={`
+          bg-white
+          col-span-1 h-full z[9999]  shadow-lg transform transition-all duration-300 ease-in-out absolute
+          ${isAsideVisible ? 'absolute top-[60px] z-[99999] left-0 w-[45.5%] md:w-[228px] lg:w-[100%] lg:relative' : 'w-0 overflow-hidden lg:w-[100%] lg:relative'}
+           lg:w-[100%] lg:relative 
+
         `}
 
        >
        <Aside />
        </div>
        
-       <div className="col-span-3">
+       <div className={`lg:col-span-4 sm:w-[100%]  lg:w-1/3  `}>
         <Outlet />
        </div>
 

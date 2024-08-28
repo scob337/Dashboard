@@ -1,63 +1,54 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
-import { FaArrowRight } from "react-icons/fa";
+import { MdOutlineShowChart ,MdLibraryBooks,MdOutlineDateRange ,MdOutlinePayment ,MdOutlineSettings  } from "react-icons/md";
+import { BsGrid1X2 } from "react-icons/bs";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function Aside() {
 
   const AsideData = [
     {
-      title: "Home",
-      link: "#1"
+      title: "Dashboard",
+      link: "#1",
+      icon : <BsGrid1X2 size={24}/>
     },
     {
-      title: "Services",
-      link: "#2"
+      title: "Activity",
+      link: "#2",
+      icon : <MdOutlineShowChart size={24}/>
     },
     {
-      title: "About Us",
-      link: "#3"
+      title: "Library",
+      link: "#3",
+      icon : <MdLibraryBooks  size={24}/>
     },
     {
-      title: "Contact",
-      link: "#4"
+      title: "Schedules",
+      link: "#4",
+      icon : <MdOutlineDateRange size={24}/>
     },
     {
-      title: "Blog",
-      link: "#5"
+      title: "Payouts",
+      link: "#5",
+      icon : <MdOutlinePayment  size={24}/>
     },
     {
-      title: "FAQ",
-      link: "#6"
+      title: "Settings",
+      link: "#6",
+      icon : <MdOutlineSettings  size={24}/>
     },
-    {
-      title: "Help Center",
-      link: "#7"
-    },
-    {
-      title: "Terms & Conditions",
-      link: "#8"
-    },
-    {
-      title: "Privacy Policy",
-      link: "#9"
-    },
-    {
-      title: "Cookie Policy",
-      link: "#10"
-    }
+
   ]
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<string | null>("#1");
  
   const Targer = (Item:string)=>{
     setActiveItem(Item)    
   }
   return (
-    <div className=" 
-    
-    " >
+    <div className="flex flex-col justify-between h-[80%]  bg-white">
       
 
-    <ul className="flex flex-col px-2 h-full justify-center items-start gap-3 mt-3
+    <ul className="flex flex-col px-2 h-[100%] justify-center items-start gap-5 mt-3 pt-5
 
     ">
       {AsideData.map((item) => (
@@ -72,12 +63,13 @@ export default function Aside() {
          className=
         {`${activeItem === item.link ? "text-white bg-indigo-500 " :"text-gray-600 "} 
           rounded-lg  
-          flex justify-between items-center
+          flex justify-start items-center gap-2
           p-2 hover:bg-indigo-500 group-hover:text-white  transition w-full cursor-pointer font-semibold`}
          >
-            {item.title}
 
-            <FaArrowRight />
+            {  item.icon }
+            {  item.title}
+
 
             </li>
 
@@ -88,9 +80,20 @@ export default function Aside() {
 
 
 
+      <div className="h-[40%] items-center flex justify-start p-1 group
+      ">
+        <p
+        className="
+        rounded-xl
+      p-2 hover:bg-indigo-500 hover:text-white  transition w-full cursor-pointer font-semibold
+        flex gap-2
+        "
+        >
+          <IoIosLogOut size={24}/>
 
-
-
+        Log Out
+        </p>
+      </div>
 
 
 
