@@ -1,7 +1,6 @@
 // src/components/SalesMountainChart.js
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Provider } from 'react-redux';
 
 const data = [
   { name: 'Jan', value: 1700 },
@@ -17,33 +16,16 @@ const data = [
   { name: 'Nov', value: 26974 },
   { name: 'Dec', value: 42368 },
 ];
-<!---->
+
 const SalesMountainChart = () => {
   return (
-    <ResponsiveContainer className="w-full bg-red-500 h-10">
-
+    <ResponsiveContainer className={""}>
       <LineChart data={data}  >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
         <Legend />
-
-
-
-
-
-
-
-        
-
-        
-
-        
-
-
-
-
         <Line
           type="monotone"
           dataKey="value"

@@ -17,7 +17,7 @@ const data = [
   { name: 'Nov', value: 26974 },
   { name: 'Dec', value: 42368 },
 ];
-<!---->
+
 const SalesMountainChart = () => {
   return (
     <ResponsiveContainer className="w-full bg-red-500 h-10">
@@ -28,21 +28,6 @@ const SalesMountainChart = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-
-
-
-
-
-
-
-        
-
-        
-
-        
-
-
-
 
         <Line
           type="monotone"

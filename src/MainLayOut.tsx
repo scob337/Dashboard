@@ -37,7 +37,7 @@ console.log(isAsideVisible)
 
       <NavBar Toggle={toggleAside} Visible={isAsideVisible}/>
 
-      <section className="w-full  grid grid-cols-5 gap-4 h-screen bg-[#f0f5fa]">
+      <section className="w-full  grid grid-cols-5 gap-4 min-h-[100vh] bg-[#f0f5fa]">
 
        <div         
         className={`

@@ -29,21 +29,6 @@ const SalesMountainChart = () => {
         <Tooltip />
         <Legend />
 
-
-
-
-
-
-
-        
-
-        
-
-        
-
-
-
-
         <Line
           type="monotone"
           dataKey="value"
