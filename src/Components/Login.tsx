@@ -43,13 +43,14 @@ export default function Login() {
       );
       setLogin(true);
       setError(false);
-     setTimeout(() => {
-      setLogin(false);
-      setError(false);
-      Navigate("/loading")
-     }, 2000);
+      setTimeout(() => {
+        setLogin(false);
+        setError(false);
+        Navigate("/loading")
+      }, 2000);
 
-      const { username, email, avatar , name } = response.data;
+      const { username, email, avatar, name, token } = response.data;
+      localStorage.setItem("user", JSON.stringify({ username, email, avatar, name, token }));
       dispatch(setUser({
         username,
         email,
@@ -63,10 +64,10 @@ export default function Login() {
       } else {
         setErrorMSG("Something went wrong.");
       }
-    
+
       console.log(error);
     }
-    
+
   };
 
   return (
@@ -76,7 +77,7 @@ export default function Login() {
         <form onSubmit={handleLogin} className="space-y-6">
           {(login || Error) && (
             <Alert
-            BG={Error ? "red-100" : "green-100"}
+              BG={Error ? "red-100" : "green-100"}
               Color={Error ? "red-400" : "green-400"}
               children={Error ? errorMSG : "Logged in successfully"}
               darkBg={Error ? "red-900" : "green-900"}
@@ -143,7 +144,7 @@ export default function Login() {
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                
+
             >
               Sign in
             </button>

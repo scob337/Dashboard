@@ -1,7 +1,18 @@
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import { RootState } from "../../RTK/store";
+import { useEffect } from "react";
 
 export default function LoadingPage() {
-    const Navigate = useNavigate()
+  const Login = useSelector((state: RootState) => state.User.Login);
+  const Navigate = useNavigate()
+
+  useEffect(() => {
+    if (!Login) {
+      Navigate("/login");
+    }
+  }, [Login, Navigate]);
+
     setTimeout(() => {
         Navigate("/")
     }, 3000)

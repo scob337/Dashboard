@@ -8,7 +8,6 @@ interface DataItem {
     color: string;
   }
   
-  // تعريف المصفوفة من نوع DataItem
   type DataArray = DataItem[];
 
 export default function CardsChart() {

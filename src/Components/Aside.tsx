@@ -1,11 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { MdOutlineShowChart, MdLibraryBooks, MdOutlineDateRange, MdOutlinePayment, MdOutlineSettings } from "react-icons/md";
 import { BsGrid1X2 } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
+import { clearUser } from "../RTK/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function Aside() {
-
+  const dispatch = useDispatch()
+  const Navigate = useNavigate()
+  const HandleLogOut = () => {
+    localStorage.removeItem("user");
+    dispatch(clearUser())
+    Navigate("/login")
+  }
   const AsideData = [
     {
       title: "Dashboard",
@@ -70,10 +78,6 @@ export default function Aside() {
               {item.icon}
               {item.title}
 
-
-
-
-
             </li>
 
           </Link>
@@ -91,6 +95,7 @@ export default function Aside() {
       p-3 hover:bg-indigo-500 hover:text-white  transition w-full cursor-pointer font-semibold
         flex gap-2
         "
+          onClick={HandleLogOut}
         >
           <IoIosLogOut size={24} />
 
